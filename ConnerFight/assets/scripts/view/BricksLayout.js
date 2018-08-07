@@ -14,6 +14,11 @@ cc.Class({
     properties: {
         spacing: 2,
         brickPrefab: cc.Prefab,
+
+        //临时添加
+        allowCopy: true,
+        redCount: 0,
+        blueCount: 0,
     },
 
     onLoad: function () {
@@ -39,10 +44,27 @@ cc.Class({
 
 
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, function (event) {
-            this.x = self.initX;
-            this.y = self.initY;
-            this.rotation = 0;
-            self.gameCtrl.getNewBricks();
+            //临时添加
+            if (self.allowCopy) {
+                var node = cc.instantiate(self.node);
+                node.parent = self.node.parent;
+                node.setPosition(self.node.x, self.node.y);
+                node.getComponent('BricksLayout').allowCopy = false;
+                self.gameCtrl.gcList.push(node);
+                self.gameCtrl.redCount += self.redCount;
+                self.gameCtrl.blueCount += self.blueCount;
+                self.gameCtrl.red.string = "r:"+self.gameCtrl.redCount.toString();
+                self.gameCtrl.blue.string = "b:"+self.gameCtrl.blueCount.toString();
+                self.redCount = 0;
+                self.blueCount = 0;
+
+
+                this.x = self.initX;
+                this.y = self.initY;
+                this.rotation = 0;
+                self.gameCtrl.getNewBricks();
+            }
+
 
 
         }, this.node);
@@ -66,9 +88,13 @@ cc.Class({
         brickNode.y = y;
         if (player) {
             brickNode.color = cc.Color.RED;
+            //临时添加
+            this.redCount += 1;
         }
         else {
             brickNode.color = cc.Color.BLUE;
+            //临时添加
+            this.blueCount += 1
         }
     },
 
