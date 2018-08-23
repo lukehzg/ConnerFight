@@ -50,10 +50,7 @@ cc.Class({
             this.random = Math.floor(Math.random() * 3);
         // this.bricksLayout.initBricksLayout(this.row[this.random], this.gameConfig.bricksList[this.random], this.player)
         for (var i = 0; i < 3; i++) {
-            for(var j = 0; j < this.gameConfig.bricksList[i].length; j++){
-                this.bricksLayout.initBricksLayout(i+1,this.gameConfig.bricksList[i],this.player)
-                console.log('length: '+ this.gameConfig.bricksList[i].length)
-                console.log('j: '+ j)
+                this.bricksLayout.initBricksLayout(this.row[i],this.gameConfig.bricksList[i],this.player)
             }
             
         }
