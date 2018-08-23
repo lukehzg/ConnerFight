@@ -101,11 +101,12 @@ cc.Class({
     initBricksLayout(row, bricks, player) {
         var len = bricks.length;
         // var random = Math.floor(Math.random() * len);
+        for(var random=0;random<len;random++){
         for (var i = 0; i < row; i++)
             for (var j = 0; j < row; j++) {
-                // if (bricks[random][i * row + j] == 0)
-                //     continue;
-                // else {
+                 if (bricks[random][i * row + j] == 0)
+                     continue;
+                 else {
                     var brickNode = null;
                     if (this.bricksPool.size() > 0) {
                         brickNode = this.bricksPool.get();
@@ -119,7 +120,7 @@ cc.Class({
                     } else if (row == 4) {
                         this.setBrickNode(brickNode, (j - 1.5) * (brickNode.width + this.spacing), + (1.5 - i) * (brickNode.width + this.spacing), player)
                     }
-
+            }
                     //this.setBrickNode(brickNode, 0, 0, 0);
                 // }
             }
