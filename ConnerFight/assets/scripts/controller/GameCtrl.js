@@ -35,7 +35,6 @@ cc.Class({
         this.player = false;
         this.random = 1;
         this.row = [1, 3, 4]
-        this.num = 0;
         this.init();
     },
 
@@ -48,15 +47,7 @@ cc.Class({
         this.player = !this.player;
         if (this.player)
             this.random = Math.floor(Math.random() * 3);
-        // this.bricksLayout.initBricksLayout(this.row[this.random], this.gameConfig.bricksList[this.random], this.player)
-        for (var i = 0; i < 3; i++) {
-            for(var j = 0; j < this.gameConfig.bricksList[i].length; j++){
-                this.bricksLayout.initBricksLayout(i+1,this.gameConfig.bricksList[i],this.player)
-                console.log('length: '+ this.gameConfig.bricksList[i].length)
-                console.log('j: '+ j)
-            }
-            
-        }
+        this.bricksLayout.initBricksLayout(this.row[this.random], this.gameConfig.bricksList[this.random], this.player)
 
     },
 
