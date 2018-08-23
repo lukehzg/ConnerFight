@@ -100,12 +100,12 @@ cc.Class({
 
     initBricksLayout(row, bricks, player) {
         var len = bricks.length;
-        var random = Math.floor(Math.random() * len);
+        // var random = Math.floor(Math.random() * len);
         for (var i = 0; i < row; i++)
             for (var j = 0; j < row; j++) {
-                if (bricks[random][i * row + j] == 0)
-                    continue;
-                else {
+                // if (bricks[random][i * row + j] == 0)
+                //     continue;
+                // else {
                     var brickNode = null;
                     if (this.bricksPool.size() > 0) {
                         brickNode = this.bricksPool.get();
@@ -121,7 +121,7 @@ cc.Class({
                     }
 
                     //this.setBrickNode(brickNode, 0, 0, 0);
-                }
+                // }
             }
 
 
