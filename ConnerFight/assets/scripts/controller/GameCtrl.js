@@ -50,8 +50,11 @@ cc.Class({
             this.random = Math.floor(Math.random() * 3);
         // this.bricksLayout.initBricksLayout(this.row[this.random], this.gameConfig.bricksList[this.random], this.player)
         for (var i = 0; i < 3; i++) {
-                this.bricksLayout.initBricksLayout(this.row[i],this.gameConfig.bricksList[i],this.player)
-            }
+              this.bricksLayout.initBricksLayout(this.row[i],this.gameConfig.bricksList[i],this.player)
+           }
+        for (var i = 0; i < 3; i++) {
+            this.bricksLayout.initBricksLayout(this.row[i],this.gameConfig.bricksList[i],!this.player)
+         }
     },
 
     buttonRotate(){

@@ -53,8 +53,8 @@ cc.Class({
                 self.gameCtrl.gcList.push(node);
                 self.gameCtrl.redCount += self.redCount;
                 self.gameCtrl.blueCount += self.blueCount;
-                self.gameCtrl.red.string = "r:"+self.gameCtrl.redCount.toString();
-                self.gameCtrl.blue.string = "b:"+self.gameCtrl.blueCount.toString();
+                self.gameCtrl.red.string = "r:" + self.gameCtrl.redCount.toString();
+                self.gameCtrl.blue.string = "b:" + self.gameCtrl.blueCount.toString();
                 self.redCount = 0;
                 self.blueCount = 0;
 
@@ -64,9 +64,6 @@ cc.Class({
                 this.rotation = 0;
                 self.gameCtrl.getNewBricks();
             }
-
-
-
         }, this.node);
 
         this.node.on(cc.Node.EventType.TOUCH_END, function (event) {
@@ -96,36 +93,59 @@ cc.Class({
             //临时添加
             this.blueCount += 1
         }
+
+
     },
 
     initBricksLayout(row, bricks, player) {
         var len = bricks.length;
+        console.log(len);
         // var random = Math.floor(Math.random() * len);
-        for(var random=0;random<len;random++){
-        for (var i = 0; i < row; i++)
-            for (var j = 0; j < row; j++) {
-                 if (bricks[random][i * row + j] == 0)
-                     continue;
-                 else {
-                    var brickNode = null;
-                    if (this.bricksPool.size() > 0) {
-                        brickNode = this.bricksPool.get();
-                    } else {
-                        brickNode = cc.instantiate(this.brickPrefab);
+        for (var random = 0; random < len; random++) {
+            for (var i = 0; i < row; i++)
+                for (var j = 0; j < row; j++) {
+                    if (bricks[random][i * row + j] == 0)
+                        continue;
+                    else {
+                        var brickNode = null;
+                        if (this.bricksPool.size() > 0) {
+                            brickNode = this.bricksPool.get();
+                        } else {
+                            brickNode = cc.instantiate(this.brickPrefab);
+                        }
+                        if (row == 1) {
+                            this.setBrickNode(brickNode, 0, 0, player);
+                        } else if (row == 3) {
+                            this.setBrickNode(brickNode, (j - 1) * (brickNode.width + this.spacing), + (1 - i) * (brickNode.width + this.spacing), player)
+                        } else if (row == 4) {
+                            this.setBrickNode(brickNode, (j - 1.5) * (brickNode.width + this.spacing), + (1.5 - i) * (brickNode.width + this.spacing), player)
+                        }
                     }
-                    if (row == 1) {
-                        this.setBrickNode(brickNode, 0, 0, player);
-                    } else if (row == 3) {
-                        this.setBrickNode(brickNode, (j - 1) * (brickNode.width + this.spacing), + (1 - i) * (brickNode.width + this.spacing), player)
-                    } else if (row == 4) {
-                        this.setBrickNode(brickNode, (j - 1.5) * (brickNode.width + this.spacing), + (1.5 - i) * (brickNode.width + this.spacing), player)
-                    }
-            }
                     //this.setBrickNode(brickNode, 0, 0, 0);
-                // }
-            }
+                    // }
+                }
+
+                var node = cc.instantiate(this.node);
+                node.parent = this.node.parent;
+                node.setPosition(this.node.x, this.node.y);
+                node.getComponent('BricksLayout').allowCopy = false;
+                this.gameCtrl.gcList.push(node);
+                this.gameCtrl.redCount += this.redCount;
+                this.gameCtrl.blueCount += this.blueCount;
+                this.gameCtrl.red.string = "r:" + this.gameCtrl.redCount.toString();
+                this.gameCtrl.blue.string = "b:" + this.gameCtrl.blueCount.toString();
+                this.redCount = 0;
+                this.blueCount = 0;
+                this.x = this.initX;
+                this.y = this.initY;
+                this.rotation = 0;
+                this.clearBricksLayout();
         }
 
+       
+
+
+       
     },
 
     clearBricksLayout() {
