@@ -124,7 +124,7 @@ cc.Class({
                     //this.setBrickNode(brickNode, 0, 0, 0);
                 // }
             }
-
+        }
 
     },
 

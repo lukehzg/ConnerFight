@@ -52,9 +52,6 @@ cc.Class({
         for (var i = 0; i < 3; i++) {
                 this.bricksLayout.initBricksLayout(this.row[i],this.gameConfig.bricksList[i],this.player)
             }
-            
-        }
-
     },
 
     buttonRotate(){
